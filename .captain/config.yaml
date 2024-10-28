@@ -1,0 +1,13 @@
+test-suites:
+  your-project-minitest:
+    command: bin/rails test
+    results:
+      language: Ruby
+      framework: minitest
+      path: tmp/reports/*.xml
+    output:
+      print-summary: true
+    partition:
+      command: bin/rails test {{ testFiles }}
+      globs:
+        - test/**/*_test.rb
