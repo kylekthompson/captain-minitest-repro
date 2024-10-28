@@ -24,3 +24,26 @@ jobs:
         run: captain run your-project-minitest --partition-index ${{ matrix.index }} --partition-total ${{ matrix.total }}
         env:
           RAILS_ENV: test
+
+  macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        index: [0, 1]
+        total: [2]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - uses: rwx-research/setup-captain@v1
+
+      - name: Run Tests
+        run: captain run your-project-minitest --partition-index ${{ matrix.index }} --partition-total ${{ matrix.total }}
+        env:
+          RAILS_ENV: test
